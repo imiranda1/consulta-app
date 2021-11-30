@@ -1,0 +1,37 @@
+<div  class="columns is-centered ng-star-inserted">
+  <div  class="column is-6">
+     <h2  class="title has-text-centered my-5">Cadastrar novo médico</h2>
+     <form  novalidate="" class="my-5 ng-pristine ng-invalid ng-touched">
+        <div  class="field">
+           <label  class="label">Nome</label>
+           <div  class="control"><input  type="text" formcontrolname="nome" placeholder="Nome" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
+           <p  class="help is-danger ng-star-inserted">Nome inválido</p>
+           <!----><!----><!---->
+        </div>
+        <div  class="field">
+           <label  class="label">Especialidade</label>
+           <div  class="select">
+              <select  placeholder="Selecione a Especialidade" formcontrolname="especialidade" class="select is-danger ng-pristine ng-invalid ng-touched">
+                 <option  value="6" class="ng-star-inserted">Anestesista</option>
+                 <!---->
+                 <option  value="1" class="ng-star-inserted">Cardiologista</option>
+                 <!---->
+                 <option  value="5" class="ng-star-inserted">Cirurgia Geral</option>
+                 <!---->
+                 <option  value="2" class="ng-star-inserted">Oftalmologista</option>
+                 <!---->
+                 <option  value="4" class="ng-star-inserted">Oncologista</option>
+                 <!---->
+                 <option  value="3" class="ng-star-inserted">Ortopedista</option>
+                 <!----><!---->
+              </select>
+           </div>
+           <p  class="help is-danger ng-star-inserted">Selecione uma especialização!</p>
+           <!----><!----><!---->
+        </div>
+        <div  class="field is-grouped">
+           <div  class="control"><button  class="button is-link">Cadastrar</button></div>
+        </div>
+     </form>
+  </div>
+</div>

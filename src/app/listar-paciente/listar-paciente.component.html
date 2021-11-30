@@ -1,0 +1,52 @@
+<div class="columns is-centered my-5 ng-star-inserted">
+  <div class="columns is-10">
+
+    <div class="container">
+
+      <table class="table" class="table is-fullwidth is-hoverable has-text-centered">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Data de Cadastro</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container>
+            <tr *ngFor="let paciente of pacienteList">
+              <td>{{paciente.nome}}</td>
+              <td>{{paciente.dataNascimento}}</td>
+              <th>{{paciente.dataCadastro}}</th>
+              <td>
+                <div class="buttons">
+                  <button  class="button is-primary">
+                    <span  class="icon-text">
+                      <span> Ver consultas</span>
+                    </span>
+                  </button>
+
+                  <button  class="button is-warning">
+                    <span  class="icon-text">
+                      <span >Editar</span>
+                      </span></button><button  class="button is-danger">
+                        <span  class="icon-text">
+                          <span >Deletar</span>
+                        </span>
+                      </button>
+                    </div>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+
+
+      </table>
+
+    </div>
+
+
+  </div>
+
+</div>

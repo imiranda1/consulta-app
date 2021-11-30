@@ -1,0 +1,19 @@
+
+<form   [formGroup]="formUser" (submit)="cadastrar()" class="ng-untouched ng-pristine ng-invalid" >
+  <div  class="field">
+    <label  class="label">Login</label>
+    <div  class="control">
+      <input type="email" formControlName="login" placeholder="exemplo@email.com" class="input is-primary ng-pristine ng-invalid ng-touched">
+    </div>
+  </div>
+    <div  class="field"><label  class="label" >Senha</label>
+      <div  class="control">
+      <input type="password" formControlName="senha" required=""  class="input is-primary ng-pristine ng-invalid ng-touched">
+    </div>
+    </div>
+    <div  class="field is-grouped">
+      <div  class="control">
+      <button  class="button is-primary">Cadastrar</button>
+    </div>
+  </div>
+</form>
