@@ -1,9 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Especialidades } from '../models/Especialidades';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EspecialidadesService {
 
-  constructor() { }
+  especialidadesURL = "https://tiagoifsp.ddns.net/clinicaMedicaJWT/especialidades.php";
+
+  constructor(private http : HttpClient) { }
+
+
+  getEspecialidades() : Observable<Especialidades[]>{
+    console.log("web-servbice get especialidades")
+    return this.http.get<Especialidades[]>(this.especialidadesURL);
+  }
 }

@@ -11,7 +11,9 @@ import { PacienteService } from '../services/paciente.service';
 })
 export class ListarPacienteComponent implements OnInit {
   pacienteList: Paciente[];
-
+  pacienteMostrar: Paciente;
+  isEditModalVisible = false;
+  isDetailsModalVisible = false;
 
   constructor(private pacienteService: PacienteService,
     private rota: ActivatedRoute,
@@ -19,15 +21,30 @@ export class ListarPacienteComponent implements OnInit {
     private toast: ToastrService) { }
 
   ngOnInit(): void {
-    this.loadMedicos();
+    this.loadPacientes();
   }
 
-  loadMedicos(): void {
-    console.log("loading medicos....");
+  loadPacientes(): void {
+    console.log("loading pacientes....");
     this.pacienteService.getPacientes().subscribe(res => {
       this.pacienteList = res;
       console.log(res);
     });
      console.log("teste");
+  }
+
+  refresh(){
+    this.ngOnInit();
+  }
+
+  showPacienteModal(paciente: Paciente){
+    console.log("showPacienteModal 1")
+    this.isEditModalVisible = true;
+    this.pacienteMostrar = paciente;
+  }
+  showConsultaPacienteModal(paciente: Paciente){
+    console.log("showConsultaPacienteModal 1")
+    this.isDetailsModalVisible = true;
+    this.pacienteMostrar = paciente;
   }
 }

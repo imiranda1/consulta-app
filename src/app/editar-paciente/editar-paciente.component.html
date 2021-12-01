@@ -1,0 +1,24 @@
+<div id="modal-id" class="modal modal-fx-fadeInScale is-active">
+  <div class="modal-background" (click)="close()"></div>
+  <div class="modal-content" >
+     <div class="box">
+        <h3 class="title has-text-centered">Editar paciente</h3>
+        <form [formGroup]="formEditPaciente" (ngSubmit)="onSubmit()">
+           <div class="field">
+              <label class="label">Nome</label>
+              <div class="control"><input type="text" formControlName="nome" placeholder="Nome" class="input"></div>
+              <!----><!---->
+           </div>
+           <div class="field">
+              <label class="label">Data de nascimento</label>
+              <div class="control"><input type="date" formControlName="dataNascimento" placeholder="Data de nascimento" class="input"></div>
+              <!----><!---->
+           </div>
+           <div class="field is-grouped">
+              <div class="control"><button class="button is-link">Editar</button></div>
+           </div>
+        </form>
+     </div>
+  </div>
+  <button aria-label="close" (click)="close()" class="modal-close is-large"></button>
+</div>

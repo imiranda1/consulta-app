@@ -1,18 +1,14 @@
 <div  class="columns is-centered">
   <div  class="column is-6">
      <h2  class="title has-text-centered my-5">Cadastrar novo paciente</h2>
-     <form  novalidate="" class="my-5 ng-untouched ng-pristine ng-invalid">
+     <form  [formGroup]="formPaciente"(submit)="cadastrarPaciente()"  class="my-5 ng-untouched ng-pristine ng-invalid">
         <div  class="field">
            <label  class="label">Nome</label>
-           <div  class="control"><input  type="text" formcontrolname="nome" placeholder="Nome" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
-
-
+           <div  class="control"><input  type="text" formControlName="nome" placeholder="Nome" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
         </div>
         <div  class="field">
            <label  class="label">Data de nascimento</label>
-           <div  class="control"><input  type="date" formcontrolname="data" placeholder="Data de nascimento" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
-
-
+           <div  class="control"><input  type="date" formControlName="dataNascimento" placeholder="Data de nascimento" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
         </div>
         <div  class="field is-grouped">
            <div  class="control"><button  class="button is-link">Cadastrar</button></div>

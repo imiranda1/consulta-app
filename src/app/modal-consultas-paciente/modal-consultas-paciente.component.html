@@ -1,0 +1,53 @@
+<div id="modal-id" class="modal modal-fx-fadeInScale is-active">
+  <div class="modal-background" (click)="close()"></div>
+  <div class="modal-content" >
+     <div class="box">
+        <div class="columns is-centered my-5 ng-star-inserted">
+          <div class="columns is-10">
+
+            <div class="container">
+              <table class="table" class="table is-fullwidth is-hoverable has-text-centered">
+                <thead>
+                  <tr>
+                    <th>Médico</th>
+                    <th>Paciente</th>
+                    <th>Data</th>
+                    <th>Cancelar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container>
+                    <tr *ngFor="let paciente of pacienteList">
+                      <td>{{paciente.nome}}</td>
+                      <td>{{paciente.dataNascimento}}</td>
+                      <th>{{paciente.dataCadastro}}</th>
+                      <td>
+                        <div class="buttons">
+                            <button  class="button is-danger">
+                              <span  class="icon-text">
+                              <span >Cancelar</span>
+                              </span>
+                              </button>
+                            </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+
+                </tbody>
+
+
+              </table>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+     </div>
+  </div>
+  <button aria-label="close" (click)="close()" class="modal-close is-large"></button>
+</div>
+

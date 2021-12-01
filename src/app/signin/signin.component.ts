@@ -10,8 +10,8 @@ import { AdministradorService } from '../services/administrador.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  formUser: FormGroup;
 
+  formUser: FormGroup;
 
   constructor(private adminService : AdministradorService,
     private rota: ActivatedRoute,

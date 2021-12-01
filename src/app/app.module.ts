@@ -20,6 +20,10 @@ import { CadastroConsultaComponent } from './cadastro-consulta/cadastro-consulta
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogInterceptor } from './LogInterceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditarPacienteComponent } from './editar-paciente/editar-paciente.component';
+import { EditarMedicoComponent } from './editar-medico/editar-medico.component';
+import { ModalConsultasPacienteComponent } from './modal-consultas-paciente/modal-consultas-paciente.component';
+import { ModalConsultasMedicoComponent } from './modal-consultas-medico/modal-consultas-medico.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListarPacienteComponent,
     ListarMedicoComponent,
     CadastroMedicoComponent,
-    CadastroConsultaComponent
+    CadastroConsultaComponent,
+    EditarPacienteComponent,
+    EditarMedicoComponent,
+    ModalConsultasPacienteComponent,
+    ModalConsultasMedicoComponent
   ],
   imports: [
     BrowserModule,
