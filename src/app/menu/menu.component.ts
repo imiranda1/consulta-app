@@ -14,9 +14,15 @@ export class MenuComponent implements OnInit {
   }
   logout(): void{
     sessionStorage.removeItem("token");
-
     this.router.navigate(['/']);
-
+  }
+  homeSession():void{
+    console.log(sessionStorage);
+    if(sessionStorage.getItem('token') != null){
+      this.router.navigate(['/home']);
+    }else{
+      this.router.navigate(['']);
+    }
   }
 
 }
