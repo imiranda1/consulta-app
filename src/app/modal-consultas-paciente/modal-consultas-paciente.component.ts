@@ -38,12 +38,7 @@ export class ModalConsultasPacienteComponent implements OnInit {
 
   filterConsulta(){
     console.log("filtrando consultas by PACIENTE...")
-    console.log(this.listaConsultas)
-
     this.filteredList = this.listaConsultas.filter(consulta => consulta.idPaciente === this.paciente.id)
-
-
-
     console.log("consultas filtradas by PACIENTE...")
     console.log("consultas {------->>>>}",  this.filteredList)
   }
@@ -57,7 +52,12 @@ export class ModalConsultasPacienteComponent implements OnInit {
     console.log(this.filteredList)
       this.filteredList.forEach(consulta => {
         this.consultaDetalhes.push(
-          {idConsulta: consulta.id, nomePaciente: paciente.nome, nomeMedico: this.getNomeMedico(consulta.idMedico), data:consulta.data})
+          {
+            idConsulta: consulta.id,
+            nomePaciente: paciente.nome,
+            nomeMedico: this.getNomeMedico(consulta.idMedico),
+            data:consulta.data
+          })
       }
       )
       console.log(this.consultaDetalhes);

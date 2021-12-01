@@ -7,12 +7,12 @@
   <div  class="field">
     <label  class="label">Login</label>
     <div  class="control">
-      <input type="email" formControlName="login" placeholder="exemplo@email.com" class="input is-primary ng-pristine ng-invalid ng-touched">
+      <input type="email" formControlName="login" placeholder="exemplo@email.com" [ngClass]="this.formUser.get('login')?.valid ? 'input is-success': 'input is-danger'">
     </div>
   </div>
     <div  class="field"><label  class="label" >Senha</label>
       <div  class="control">
-      <input type="password" formControlName="senha" required=""  class="input is-primary ng-pristine ng-invalid ng-touched">
+      <input type="password" formControlName="senha" required=""  [ngClass]="this.formUser.get('senha')?.valid ? 'input is-success': 'input is-danger'">
     </div>
     </div>
     <div  class="field is-grouped">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdministradorService } from '../services/administrador.service';
@@ -22,9 +22,9 @@ export class SignupComponent implements OnInit {
   }
   private inicializarForm(){
     this.formUser = new FormGroup({
-      nome: new FormControl(""),
-      login: new FormControl(""),
-      senha: new FormControl(""),
+      nome: new FormControl(null,Validators.required),
+      login: new FormControl(null,Validators.required),
+      senha: new FormControl(null,Validators.required)
     })
   }
 

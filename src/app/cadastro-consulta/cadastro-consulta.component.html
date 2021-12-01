@@ -5,40 +5,43 @@
       <div class="field">
         <label class="label">Médico</label>
         <div class="select">
-          <select formControlName="idMedico" class="select is-danger ng-untouched ng-pristine ng-invalid">
-            <option disabled selected value> -- select an option -- </option>
+          <select formControlName="idMedico" [ngClass]="this.formConsulta.get('idMedico')?.valid ? 'input is-success': 'input is-danger'">
+            <!-- <option disabled selected value> -- select an option -- </option> -->
             <option *ngFor="let medico of medicoList" value={{medico.id}}>
               {{medico.nome}}
             </option>
           </select>
         </div>
-        <p class="help is-danger ng-star-inserted">Médico inválido</p>
+
       </div>
       <div class="field">
         <label class="label">Paciente</label>
         <div class="select">
-          <select formControlName="idPaciente" class="select is-danger ng-untouched ng-pristine ng-invalid">
-            <option disabled selected value> -- select an option -- </option>
+          <select formControlName="idPaciente" [ngClass]="this.formConsulta.get('idPaciente')?.valid ? 'input is-success': 'input is-danger'" >
+
             <option *ngFor="let paciente of pacienteList" value={{paciente.id}}>
               {{paciente.nome}}
             </option>
           </select>
         </div>
-        <p class="help is-danger ng-star-inserted">Paciente inválido</p>
+
 
       </div>
       <div class="field">
         <label class="label">Data da consulta</label>
-        <div class="control"><input type="date" formControlName="data"
-            class="input is-danger ng-untouched ng-pristine ng-invalid" /></div>
-        <p class="help is-danger ng-star-inserted">Selecione uma data e hora válidas!</p>
+        <div class="control">
+          <input type="date" formControlName="data"
+          [ngClass]="this.formConsulta.get('data')?.valid ? 'input is-success': 'input is-danger'" /></div>
+
 
       </div>
       <div class="field">
         <label class="label">Dia da consulta</label>
-        <div class="control"><input type="time" formControlName="hora"
-            class="input is-danger ng-untouched ng-pristine ng-invalid" /></div>
-        <p class="help is-danger ng-star-inserted">Selecione uma data e hora válidas!</p>
+        <div class="control">
+          <input type="time" formControlName="hora"
+          [ngClass]="this.formConsulta.get('hora')?.valid ? 'input is-success': 'input is-danger'" />
+        </div>
+
       </div>
       <div class="field is-grouped">
         <div class="control"><button class="button is-link">Cadastrar</button></div>
