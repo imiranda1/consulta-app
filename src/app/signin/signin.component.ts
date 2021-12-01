@@ -36,16 +36,13 @@ export class SigninComponent implements OnInit {
 
   fazerLogin(){
     this.adminService.fazerLogin(this.formUser.value).subscribe(res => {
-
       if(res.token){
         this.router.navigate(['/home']);
         this.toast.success("Login realizado com sucesso!");
-
       }
       else{
         console.log(res.ok)
         this.toast.error("Erro ao realizar login");
-
       }
     });
   }

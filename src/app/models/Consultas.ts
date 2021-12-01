@@ -1,6 +1,7 @@
 export interface Consultas {
-  id: number,
-  idPaciente: number,
-  idMedico:number,
+  id: string,
+  idPaciente: string,
+  idMedico:string,
   data: string;
+  hora:string
 }

@@ -47,4 +47,15 @@ export class ListarPacienteComponent implements OnInit {
     this.isDetailsModalVisible = true;
     this.pacienteMostrar = paciente;
   }
+  
+  deletePaciente(pacienteId:string){
+    this.pacienteService.excluirPaciente(pacienteId).subscribe(res => {
+      if(res.ok == true){
+        this.toast.success("Paciente excluído com Sucesso");
+        location.reload();
+      }else{
+        this.toast.error("Erro ao excluir o paciente");
+      }
+    });
+  }
 }
