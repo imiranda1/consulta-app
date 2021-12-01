@@ -50,7 +50,7 @@ export class CadastroConsultaComponent implements OnInit {
       idPaciente: new FormControl(null),
       data: new FormControl(null),
       hora: new FormControl(null),
-      id: new FormControl(null),
+
     })
   }
   cadastrarConsulta() {

@@ -5,7 +5,7 @@
       <div class="field">
         <label class="label">Médico</label>
         <div class="select">
-          <select formControllName="idMedico" class="select is-danger ng-untouched ng-pristine ng-invalid">
+          <select formControlName="idMedico" class="select is-danger ng-untouched ng-pristine ng-invalid">
             <option disabled selected value> -- select an option -- </option>
             <option *ngFor="let medico of medicoList" value={{medico.id}}>
               {{medico.nome}}
@@ -17,7 +17,7 @@
       <div class="field">
         <label class="label">Paciente</label>
         <div class="select">
-          <select formControllName="idPaciente" class="select is-danger ng-untouched ng-pristine ng-invalid">
+          <select formControlName="idPaciente" class="select is-danger ng-untouched ng-pristine ng-invalid">
             <option disabled selected value> -- select an option -- </option>
             <option *ngFor="let paciente of pacienteList" value={{paciente.id}}>
               {{paciente.nome}}
@@ -25,18 +25,18 @@
           </select>
         </div>
         <p class="help is-danger ng-star-inserted">Paciente inválido</p>
-        
+
       </div>
       <div class="field">
         <label class="label">Data da consulta</label>
-        <div class="control"><input type="date" formControllName="data"
+        <div class="control"><input type="date" formControlName="data"
             class="input is-danger ng-untouched ng-pristine ng-invalid" /></div>
         <p class="help is-danger ng-star-inserted">Selecione uma data e hora válidas!</p>
-       
+
       </div>
       <div class="field">
         <label class="label">Dia da consulta</label>
-        <div class="control"><input type="time" formControllName="hora"
+        <div class="control"><input type="time" formControlName="hora"
             class="input is-danger ng-untouched ng-pristine ng-invalid" /></div>
         <p class="help is-danger ng-star-inserted">Selecione uma data e hora válidas!</p>
       </div>

@@ -59,5 +59,5 @@
 </ng-container>
 
 <ng-container *ngIf="isDetailsModalVisible">
-  <app-modal-consultas-paciente (onClose)="isEditModalVisible = false" [paciente]="pacienteMostrar" (update) = "refresh()"></app-modal-consultas-paciente>
+  <app-modal-consultas-paciente (onClose)="isDetailsModalVisible = false" [paciente]="pacienteMostrar" [listaConsultas]="consultasList" [listaMedicos]="medicoList" (update) = "refresh()"></app-modal-consultas-paciente>
 </ng-container>

@@ -22,8 +22,8 @@ export class ConsultaService {
     let body = new HttpParams();
     body = body.set("idMedico", consulta.idMedico);
     body = body.set("idPaciente", consulta.idPaciente);
-    body = body.set("data", consulta.data + " " + consulta.hora);
+    body = body.set("data", "2021-12-08 20:45");
     return this.http.post<any>(this.consultasURL, body, { observe: "response" });
   }
-  
+
 }
