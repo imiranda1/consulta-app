@@ -5,11 +5,11 @@
         <div  class="field">
            <label  class="label">Nome</label>
            <div  class="control">
-              <input  type="text" formControlName="nome" placeholder="Nome" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
+              <input  type="text" formControlName="nome" placeholder="Nome" [ngClass]="this.formPaciente.get('nome')?.valid ? 'input is-success': 'input is-danger'"></div>
         </div>
         <div  class="field">
            <label  class="label">Data de nascimento</label>
-           <div  class="control"><input  type="date" formControlName="dataNascimento" placeholder="Data de nascimento" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
+           <div  class="control"><input  type="date" formControlName="dataNascimento" placeholder="Data de nascimento" [ngClass]="this.formPaciente.get('dataNascimento')?.valid ? 'input is-success': 'input is-danger'"></div>
         </div>
         <div  class="field is-grouped">
            <div  class="control"><button  class="button is-link">Cadastrar</button></div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medico } from '../models/Medico';
@@ -46,11 +46,11 @@ export class CadastroConsultaComponent implements OnInit {
   }
   private inicializarForm() {
     this.formConsulta = new FormGroup({
-      idMedico: new FormControl(null),
-      idPaciente: new FormControl(null),
-      data: new FormControl(null),
-      hora: new FormControl(null),
-      id: new FormControl(null),
+      idMedico: new FormControl(null,Validators.required),
+      idPaciente: new FormControl(null,Validators.required),
+      data: new FormControl(null,Validators.required),
+      hora: new FormControl(null,Validators.required),
+
     })
   }
   cadastrarConsulta() {

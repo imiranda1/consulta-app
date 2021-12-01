@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PacienteService } from '../services/paciente.service';
@@ -22,14 +22,13 @@ export class CadastroPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicializarForm();
-
   }
 
   private inicializarForm(){
     this.formPaciente = new FormGroup({
       id: new FormControl(null),
-      nome: new FormControl(null),
-      dataNascimento: new FormControl(null),
+      nome: new FormControl(null,Validators.required ),
+      dataNascimento: new FormControl(null, Validators.required),
       dataCadastro: new FormControl(null),
     })
   }

@@ -14,11 +14,27 @@
         </thead>
         <tbody>
           <ng-container>
-            <tr>
-              <td>teste</td>
-              <td>teste</td>
-              <td>teste</td>
-              <td>teste</td>
+            <tr *ngFor="let consultaDetalhe of consultaDetalhes">
+              <td>{{consultaDetalhe.nomeMedico}}</td>
+              <td>{{consultaDetalhe.nomePaciente}}</td>
+              <td>{{consultaDetalhe.data}}</td>
+              <!-- <td>
+                <div class="buttons">
+                  <button  class="button is-danger"> -->
+                        <!-- (click)="deletePaciente(paciente.id)" -->
+                    <!-- Deletar
+                  </button>
+                </div>
+              </td> -->
+
+
+              <td>
+                <button class="button is-danger">
+                  <span  class="icon-text">
+                    <span >Cancelar</span>
+                  </span>
+                  </button>
+                </td>
             </tr>
           </ng-container>
         </tbody>
