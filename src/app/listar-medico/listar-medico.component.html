@@ -1,8 +1,6 @@
 <div class="columns is-centered my-5 ng-star-inserted">
   <div class="columns is-10">
-
     <div class="container">
-
       <table class="table" class="table is-fullwidth is-hoverable has-text-centered">
         <thead>
           <tr>
@@ -20,32 +18,37 @@
               <td>{{medico.idEspecialidade}}</td>
               <td>
                 <div class="buttons">
-                  <button  class="button is-primary">
-                    <span  class="icon-text">
+                  <button (click)="showConsultaMedicoModal(medico)" class="button is-primary">
+                    <span class="icon-text">
                       <span> Ver consultas</span>
                     </span>
                   </button>
-
-                  <button  class="button is-warning">
-                    <span  class="icon-text">
-                      <span >Editar</span>
-                      </span></button><button  class="button is-danger">
-                        <span  class="icon-text">
-                          <span >Deletar</span>
-                        </span>
-                      </button>
-                    </div>
+                  <button (click)="showMedicoModalEditar(medico)" class="button is-warning">
+                    <span class="icon-text">
+                      <span>Editar</span>
+                    </span>
+                  </button>
+                  <button (click)="deleteMedico(medico.id)" class="button is-danger">
+                    <span class="icon-text">
+                      <span>Deletar</span>
+                    </span>
+                  </button>
+                </div>
               </td>
             </tr>
           </ng-container>
-
         </tbody>
-
       </table>
-
     </div>
-
-
   </div>
-
 </div>
+<ng-container *ngIf="isEditModalVisible">
+  <app-editar-medico (onClose)="isEditModalVisible = false" [medico]="medicoMostrar" (update)="refresh()">
+  </app-editar-medico>
+</ng-container>
+
+<ng-container *ngIf="isDetailsModalVisible">
+  <app-modal-consultas-medico (onClose)="isDetailsModalVisible = false" [medico]="medicoMostrar"
+    [listaConsultas]="consultasList" [listaPaciente]="pacienteList" (update)="refresh()">
+  </app-modal-consultas-medico>
+</ng-container>

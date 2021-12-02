@@ -26,4 +26,8 @@ export class ConsultaService {
     return this.http.post<any>(this.consultasURL, body, { observe: "response" });
   }
 
+  excluirConsulta(idConsulta: string): Observable<any> {
+    return this.http.delete(this.consultasURL + "/?id=" + idConsulta, { observe: "response" });
+  }
+
 }
