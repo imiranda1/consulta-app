@@ -19,7 +19,6 @@ export class ModalConsultasPacienteComponent implements OnInit {
   @Input() listaMedicos: Medico[];
   @Input() listaConsultas: Consultas[];
 
-
   consultaDetalhes:ConsultaDetalhe[] = []
   filteredList: Consultas[] = [];
 
@@ -30,26 +29,19 @@ export class ModalConsultasPacienteComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("---------");
-    console.log(this.listaConsultas);
-    console.log("---------");
     this.createConsultaDetalhes(this.paciente);
   }
 
   filterConsulta(){
     console.log("filtrando consultas by PACIENTE...")
-    this.filteredList = this.listaConsultas.filter(consulta => consulta.idPaciente === this.paciente.id)
-    console.log("consultas filtradas by PACIENTE...")
-    console.log("consultas {------->>>>}",  this.filteredList)
+    this.filteredList = this.listaConsultas
+      .filter(consulta => consulta.idPaciente === this.paciente.id);
   }
 
   createConsultaDetalhes(paciente:Paciente){
-
-    console.log("Criando detalhes da Consulta....")
-
+    console.log("Criando detalhes da Consulta....");
+    console.log("filtrando....");
     this.filterConsulta();
-    console.log("filtrando....")
-    console.log(this.filteredList)
       this.filteredList.forEach(consulta => {
         this.consultaDetalhes.push(
           {
@@ -71,25 +63,13 @@ export class ModalConsultasPacienteComponent implements OnInit {
 
 
   getNomeMedico(idMedico: string): string {
-    console.log("Buscando Medico....")
+    console.log("Buscando Medico....");
     const foundMedico = this.listaMedicos.find(medico => medico.id == idMedico);
-    console.log("nome do medico" + foundMedico.nome);
     return foundMedico.nome;
   }
 
 
-/*
-  loadPacientes(): void {
-    console.log("loading pacientes....");
-    this.pacienteService.getPacientes().subscribe(res => {
-      this.pacienteList = res;
-      console.log(res);
-    });
-     console.log("teste");
-  }
-*/
   close(){
-    console.log("Não funciona");
     this.onClose.emit(null);
   }
 
