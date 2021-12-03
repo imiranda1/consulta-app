@@ -21,22 +21,22 @@
               <td>
                 <div class="buttons">
                   <button (click)="showConsultaPacienteModal(paciente)" class="button is-primary">
-                    <span  class="icon-text">
+                    <span class="icon-text">
                       <span> Ver consultas</span>
                     </span>
                   </button>
 
                   <button (click)="showPacienteModal(paciente)" class="button is-warning">
-                    <span  class="icon-text">
-                      <span >Editar</span>
-                      </span>
-                    </button>
-                      <button (click)="deletePaciente(paciente.id)" class="button is-danger">
-                        <span  class="icon-text">
-                          <span>Deletar</span>
-                        </span>
-                      </button>
-                    </div>
+                    <span class="icon-text">
+                      <span>Editar</span>
+                    </span>
+                  </button>
+                  <button (click)="deletePaciente(paciente.id)" class="button is-danger">
+                    <span class="icon-text">
+                      <span>Deletar</span>
+                    </span>
+                  </button>
+                </div>
               </td>
             </tr>
           </ng-container>
@@ -55,9 +55,11 @@
 
 
 <ng-container *ngIf="isEditModalVisible">
-  <app-editar-paciente (onClose)="isEditModalVisible = false" [paciente]="pacienteMostrar" (update) = "refresh()" ></app-editar-paciente>
+  <app-editar-paciente (onClose)="isEditModalVisible = false" [paciente]="pacienteMostrar" (update)="refresh()">
+  </app-editar-paciente>
 </ng-container>
 
 <ng-container *ngIf="isDetailsModalVisible">
-  <app-modal-consultas-paciente (onClose)="isDetailsModalVisible = false" [paciente]="pacienteMostrar" [listaConsultas]="consultasList" [listaMedicos]="medicoList" (update) = "refresh()"></app-modal-consultas-paciente>
+  <app-modal-consultas-paciente (onClose)="isDetailsModalVisible = false" [paciente]="pacienteMostrar"
+    [listaConsultas]="consultasList" [listaMedicos]="medicoList" (update)="refresh()"></app-modal-consultas-paciente>
 </ng-container>

@@ -6,13 +6,14 @@
         <form [formGroup]="formEditPaciente" (ngSubmit)="onSubmit()">
            <div class="field">
               <label class="label">Nome</label>
-              <div class="control"><input type="text" formControlName="nome" placeholder="Nome" class="input"></div>
-              <!----><!---->
+              <div class="control">
+                 <input type="text" formControlName="nome" placeholder="Nome" class="input"></div>
            </div>
            <div class="field">
               <label class="label">Data de nascimento</label>
-              <div class="control"><input type="date" formControlName="dataNascimento" placeholder="Data de nascimento" class="input"></div>
-              <!----><!---->
+              <div class="control">
+                 <input type="date" formControlName="dataNascimento" placeholder="Data de nascimento" class="input">
+               </div>
            </div>
            <div class="field is-grouped">
               <div class="control"><button class="button is-link">Editar</button></div>

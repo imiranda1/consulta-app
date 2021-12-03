@@ -68,11 +68,20 @@ export class ModalConsultasPacienteComponent implements OnInit {
     return foundMedico.nome;
   }
 
-
   close(){
     this.onClose.emit(null);
   }
 
+  deleteConsulta(consultaId:string){
+    this.serviceConsultas.excluirConsulta(consultaId).subscribe(res => {
+      if(res.ok == true){
+        this.toastr.success("Consulta excluída com Sucesso");
+        location.reload();
+      }else{
+        this.toastr.error("Erro ao excluir a consulta");
+      }
+    });
+  }
 
 
 }

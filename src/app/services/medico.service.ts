@@ -25,4 +25,16 @@ export class MedicoService {
     return this.http.post<any>(this.medicoURL, body, { observe: "response" });
   }
 
+  excluirMedico(idMedico: string): Observable<any> {
+    return this.http.delete(this.medicoURL + "/?id=" + idMedico, { observe: "response" });
+  }
+
+  editarMedico(medico: Medico): Observable<any> {
+    let body = new HttpParams();
+    body = body.set("id", medico.id);
+    body = body.set("nome", medico.nome);
+    body = body.set("idEspecialidade", medico.idEspecialidade);
+    return this.http.put<any>(this.medicoURL, body, { observe: "response" });
+  }
+
 }

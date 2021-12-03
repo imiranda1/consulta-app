@@ -6,8 +6,8 @@
       <table class="table" class="table is-fullwidth is-hoverable has-text-centered">
         <thead>
           <tr>
-            <th>Médico</th>
             <th>Paciente</th>
+            <th>Médico</th>           
             <th>Data</th>
             <th>Cancelar</th>
           </tr>
@@ -15,26 +15,16 @@
         <tbody>
           <ng-container>
             <tr *ngFor="let consultaDetalhe of consultaDetalhes">
-              <td>{{consultaDetalhe.nomeMedico}}</td>
               <td>{{consultaDetalhe.nomePaciente}}</td>
+              <td>{{consultaDetalhe.nomeMedico}}</td>             
               <td>{{consultaDetalhe.data}}</td>
-              <!-- <td>
-                <div class="buttons">
-                  <button  class="button is-danger"> -->
-                        <!-- (click)="deletePaciente(paciente.id)" -->
-                    <!-- Deletar
-                  </button>
-                </div>
-              </td> -->
-
-
               <td>
-                <button class="button is-danger">
-                  <span  class="icon-text">
-                    <span >Cancelar</span>
+                <button (click)="deleteConsulta(consultaDetalhe.idConsulta)" class="button is-danger">
+                  <span class="icon-text">
+                    <span>Cancelar</span>
                   </span>
-                  </button>
-                </td>
+                </button>
+              </td>
             </tr>
           </ng-container>
         </tbody>

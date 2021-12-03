@@ -1,1 +1,31 @@
-<p>editar-medico works!</p>
+<div id="modal-id" class="modal modal-fx-fadeInScale is-active">
+  <div class="modal-background" (click)="close()"></div>
+  <div class="modal-content">
+    <div class="box">
+      <h3 class="title has-text-centered">Editar Médico</h3>
+      <form [formGroup]="formEditMedico" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label class="label">Nome</label>
+          <div class="control">
+            <input type="text" formControlName="nome" placeholder="Nome" class="input">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Especialidade</label>
+          <div class="select">
+            <select formControlName="idEspecialidade" class="select is-danger ng-untouched ng-pristine ng-invalid">
+              <option disabled selected value> -- select an option -- </option>
+              <option *ngFor="let especialidade of especialidades" value={{especialidade.id}}>
+                {{especialidade.nome}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control"><button class="button is-link">Editar</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button aria-label="close" (click)="close()" class="modal-close is-large"></button>
+</div>

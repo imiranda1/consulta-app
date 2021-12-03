@@ -1,1 +1,36 @@
-<p>modal-consultas-medico works!</p>
+<div id="modal-id" class="modal modal-fx-fadeInScale is-active">
+    <div class="modal-background" (click)="close()"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h3 class="title has-text-centered">Consultas {{medico.nome}}</h3>
+        <table class="table" class="table is-fullwidth is-hoverable has-text-centered">
+          <thead>
+            <tr>
+              <th>Médico</th>
+              <th>Paciente</th>
+              <th>Data</th>
+              <th>Cancelar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container>
+              <tr *ngFor="let consultaDetalhe of consultaDetalhes">
+                <td>{{consultaDetalhe.nomeMedico}}</td>
+                <td>{{consultaDetalhe.nomePaciente}}</td>
+                <td>{{consultaDetalhe.data}}</td>
+                <td>
+                  <button (click)="deleteConsulta(consultaDetalhe.idConsulta)" class="button is-danger">
+                    <span class="icon-text">
+                      <span>Cancelar</span>
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button aria-label="close" (click)="close()" class="modal-close is-large"></button>
+  </div>
+  
