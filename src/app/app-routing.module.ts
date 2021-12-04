@@ -13,13 +13,14 @@ import { CadastroConsultaComponent } from './cadastro-consulta/cadastro-consulta
 
 
 const routes : Routes = [
-  {path: '', component: WelcomeComponent},
+  {path: 'welcome', component: WelcomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'cadastrar-paciente', component: CadastroPacienteComponent},
   {path: 'listar-paciente', component: ListarPacienteComponent},
   {path: 'cadastrar-medico', component: CadastroMedicoComponent},
   {path: 'listar-medico', component: ListarMedicoComponent},
   {path: 'cadastrar-consulta', component: CadastroConsultaComponent},
+  {path: '', redirectTo:'/welcome', pathMatch: 'full'}
 
 ];
 

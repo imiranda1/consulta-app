@@ -76,7 +76,8 @@ export class CadastroConsultaComponent implements OnInit {
       console.log(res);
       if (res.body.id) {
         this.toastr.success("Consulta cadastrado com Sucesso");
-        this.router.navigate(['/listar-paciente']);
+        // this.router.navigate(['/listar-paciente']);
+        this.inicializarForm();
       }
       else {
         this.toastr.error("Erro ao cadastrar Paciente");
