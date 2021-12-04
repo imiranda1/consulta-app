@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Consultas } from '../models/Consultas';
+
 import { Especialidades } from '../models/Especialidades';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
 import { EspecialidadesService } from '../services/especialidades.service';
-import { MedicoService } from '../services/medico.service';
-import { PacienteService } from '../services/paciente.service';
-import { MedicoDetalhe } from '../models/MedicoDetalhe';
+
+import { Medico } from '../models/Medico';
+import { Paciente } from '../models/Paciente';
+import { ConsultaService } from '../services/consulta.service';
+
 
 @Component({
   selector: 'app-listar-medico',
@@ -19,12 +22,14 @@ import { MedicoDetalhe } from '../models/MedicoDetalhe';
 export class ListarMedicoComponent implements OnInit {
 
   medicoList: Medico[];
+
   pacienteList: Paciente[];
   consultasList: Consultas[]
   isEditModalVisible = false;
   isDetailsModalVisible = false;
   medicoMostrar: Medico;
   especialidades: Especialidades[];//
+
 
   constructor(private medicoService: MedicoService,
     private pacienteService: PacienteService,
@@ -37,8 +42,12 @@ export class ListarMedicoComponent implements OnInit {
   ngOnInit(): void {
     this.loadMedicos();
     this.loadPacientes();
+
     this.loadConsultas();
     this.loadEspecialidades();
+
+    this.loadConsultas
+
   }
 
   showMedicoModalEditar(medico: Medico) {
@@ -46,7 +55,9 @@ export class ListarMedicoComponent implements OnInit {
     this.medicoMostrar = medico;
   }
 
-  refresh() {
+
+  refresh(){
+
     this.ngOnInit();
   }
 
@@ -66,6 +77,7 @@ export class ListarMedicoComponent implements OnInit {
     this.medicoService.getMedicos().subscribe(res => {
       this.medicoList = res;
     });
+
   }
 
   loadPacientes(): void {
@@ -82,9 +94,31 @@ export class ListarMedicoComponent implements OnInit {
   }
 
   showConsultaMedicoModal(medico: Medico) {
+
+    console.log("teste");
+  }
+
+  loadPacientes(): void {
+    console.log("loading pacientes....");
+    this.pacienteService.getPacientes().subscribe(res => {
+      this.pacienteList = res;
+      console.log(res);
+    });
+     console.log("teste");
+  }
+
+  loadConsultas(){
+    this.consultaService.getConsultas().subscribe(res =>{
+      this.consultasList = res;
+      console.log(res);
+    });
+  }
+
+  showConsultaPacienteModal(medico: Medico){
     this.isDetailsModalVisible = true;
     this.medicoMostrar = medico;
   }
+
 
   loadEspecialidades(): void {
     this.especialidadeService.getEspecialidades().subscribe(res => {
