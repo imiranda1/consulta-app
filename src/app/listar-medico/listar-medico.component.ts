@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Consultas } from '../models/Consultas';
+
+import { Especialidades } from '../models/Especialidades';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
-import { MedicoService } from '../services/medico.service';
-import { PacienteService } from '../services/paciente.service';
+import { EspecialidadesService } from '../services/especialidades.service';
+
+import { Medico } from '../models/Medico';
+import { Paciente } from '../models/Paciente';
+import { ConsultaService } from '../services/consulta.service';
+
 
 @Component({
   selector: 'app-listar-medico',
@@ -16,23 +22,32 @@ import { PacienteService } from '../services/paciente.service';
 export class ListarMedicoComponent implements OnInit {
 
   medicoList: Medico[];
-  pacienteList:Paciente[];
-  consultasList:Consultas[]
+
+  pacienteList: Paciente[];
+  consultasList: Consultas[]
   isEditModalVisible = false;
   isDetailsModalVisible = false;
   medicoMostrar: Medico;
+  especialidades: Especialidades[];//
+
 
   constructor(private medicoService: MedicoService,
     private pacienteService: PacienteService,
     private consultaService: ConsultaService,
     private rota: ActivatedRoute,
     private router: Router,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private especialidadeService: EspecialidadesService) { }
 
   ngOnInit(): void {
     this.loadMedicos();
     this.loadPacientes();
+
+    this.loadConsultas();
+    this.loadEspecialidades();
+
     this.loadConsultas
+
   }
 
   showMedicoModalEditar(medico: Medico) {
@@ -40,7 +55,9 @@ export class ListarMedicoComponent implements OnInit {
     this.medicoMostrar = medico;
   }
 
+
   refresh(){
+
     this.ngOnInit();
   }
 
@@ -59,8 +76,25 @@ export class ListarMedicoComponent implements OnInit {
     console.log("loading medicos....");
     this.medicoService.getMedicos().subscribe(res => {
       this.medicoList = res;
-      console.log(res);
     });
+
+  }
+
+  loadPacientes(): void {
+    console.log("loading pacientes....");
+    this.pacienteService.getPacientes().subscribe(res => {
+      this.pacienteList = res;
+    });
+  }
+
+  loadConsultas() {
+    this.consultaService.getConsultas().subscribe(res => {
+      this.consultasList = res;
+    });
+  }
+
+  showConsultaMedicoModal(medico: Medico) {
+
     console.log("teste");
   }
 
@@ -85,4 +119,10 @@ export class ListarMedicoComponent implements OnInit {
     this.medicoMostrar = medico;
   }
 
+
+  loadEspecialidades(): void {
+    this.especialidadeService.getEspecialidades().subscribe(res => {
+      this.especialidades = res;
+    });
+  }
 }

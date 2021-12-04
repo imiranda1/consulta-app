@@ -29,6 +29,9 @@ export class ModalConsultasMedicoComponent implements OnInit {
 
   ngOnInit(): void {
     this.createConsultaDetalhes(this.medico);
+
+    console.log(this.listaConsultas);
+
   }
 
   createConsultaDetalhes(medico: Medico) {
