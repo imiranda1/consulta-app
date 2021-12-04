@@ -13,11 +13,9 @@ export class MedicoService {
 
 
   getMedicos() : Observable<Medico[]>{
-    console.log("web-servbice messages")
     return this.http.get<Medico[]>(this.medicoURL);
   }
   cadastrarMedico(medico: Medico): Observable<any> {
-    console.log(medico);
     let body = new HttpParams();
     body = body.set("nome", medico.nome);
     body = body.set("idEspecialidade", medico.idEspecialidade);
@@ -26,7 +24,6 @@ export class MedicoService {
   }
 
   excluirMedico(idMedico: string): Observable<any> {
-    console.log("medico deletado service")
     return this.http.delete(this.medicoURL + "/?id=" + idMedico, { observe: "response" });
   }
 

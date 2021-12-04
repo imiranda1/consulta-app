@@ -38,7 +38,6 @@ export class SigninComponent implements OnInit {
         this.toastr.success("Login realizado com sucesso!");
       }
       else{
-        console.log(res.ok)
         this.toastr.error("Erro ao realizar login");
       }
     });

@@ -31,7 +31,6 @@ export class SignupComponent implements OnInit {
 
   cadastrar(){
     this.adminService.cadastrar(this.formUser.value).subscribe(res =>{
-      console.log(res);
       if(res.id){
         this.toast.success("Cadastro realizado com Sucesso");
         this.fazerLogin(this.formUser.value);
@@ -50,7 +49,6 @@ export class SignupComponent implements OnInit {
         this.toast.success("Login realizado com sucesso!");
       }
       else{
-        console.log(res.ok)
         this.toast.error("Erro ao realizar login");
       }
     });

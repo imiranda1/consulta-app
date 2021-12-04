@@ -48,7 +48,6 @@ export class CadastroPacienteComponent implements OnInit {
 
   cadastrarPaciente(){
     this.pacienteService.cadastrarPaciente(this.formPaciente.value).subscribe(res =>{
-      console.log(res);
       if(res.body.id){
         this.toast.success("Paciente cadastrado com Sucesso");
         this.router.navigate(['/listar-paciente']);

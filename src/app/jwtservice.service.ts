@@ -10,13 +10,9 @@ export class JWTServiceService {
 
   tokenValidator(){
   let token = sessionStorage.getItem("token");
-  console.log(token)
     if(token){
       const helper = new JwtHelperService();
       const isExpired = helper.isTokenExpired(token);
-
-      console.log("TOKEN EXPIRADO ?: --->> " +isExpired);
-
       return !isExpired?true:false;
     }
   }

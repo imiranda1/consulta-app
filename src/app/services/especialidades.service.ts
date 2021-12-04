@@ -14,7 +14,6 @@ export class EspecialidadesService {
 
 
   getEspecialidades() : Observable<Especialidades[]>{
-    console.log("web-servbice get especialidades")
     return this.http.get<Especialidades[]>(this.especialidadesURL);
   }
 }

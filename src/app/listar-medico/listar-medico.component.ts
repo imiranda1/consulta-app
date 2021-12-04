@@ -68,21 +68,25 @@ export class ListarMedicoComponent implements OnInit {
   }
 
   deleteMedico(id: string): void {
-    console.log("medico deletado")
-    this.medicoService.excluirMedico(id).subscribe(res => {
-      console.log("medico deletado")
-      console.log(res)
-      if (res.body.status == "OK") {
-        this.toast.success("Médico excluído com Sucesso");
-        this.loadMedicos();
-      } else {
-        this.toast.error("Erro ao excluir o médico");
-      }
-    });
+
+    if(this.jwtHelper.tokenValidator){
+      this.medicoService.excluirMedico(id).subscribe(res => {
+        if (res.body.status == "OK") {
+          this.toast.success("Médico excluído com Sucesso");
+          this.loadMedicos();
+        } else {
+          this.toast.error("Erro ao excluir o médico");
+        }
+      });
+
+    }else{
+      this.toast.error("Sessão Expirada");
+      this.router.navigate(['/']);
+    }
+
   }
 
   loadMedicos(): void {
-    console.log("loading medicos....");
     this.medicoService.getMedicos().subscribe(res => {
       this.medicoList = res;
       this.buildMedicoDetalhes();
@@ -93,9 +97,7 @@ export class ListarMedicoComponent implements OnInit {
 
   buildMedicoDetalhes(){
     this.medicoList.forEach(medico =>{
-      console.log("building medico especialidade")
       medico.nomeEspecialdiade = this.getNomeEspecialidadeById(medico.idEspecialidade)
-      console.log("building medico especialidade:::" + this.getNomeEspecialidadeById(medico.idEspecialidade))
     })
 
   }
@@ -107,7 +109,6 @@ export class ListarMedicoComponent implements OnInit {
   }
 
   loadPacientes(): void {
-    console.log("loading pacientes....");
     this.pacienteService.getPacientes().subscribe(res => {
       this.pacienteList = res;
     });
@@ -129,7 +130,6 @@ export class ListarMedicoComponent implements OnInit {
   loadEspecialidades(): void {
     this.especialidadeService.getEspecialidades().subscribe(res => {
       this.especialidades = res;
-      console.log(res);
     });
   }
 
@@ -144,7 +144,6 @@ export class ListarMedicoComponent implements OnInit {
 
   }
 
-  // nossa função delay com suporte a promisse.
   private delay(ms: number): Promise<boolean> {
     return new Promise(resolve => {
       setTimeout(() => {

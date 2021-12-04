@@ -46,20 +46,14 @@ export class CadastroConsultaComponent implements OnInit {
 
   }
   loadPacientes(): void {
-    console.log("loading pacientes....");
     this.servicePaciente.getPacientes().subscribe(res => {
       this.pacienteList = res;
-      console.log(res);
     });
-    console.log("teste");
   }
   loadMedicos(): void {
-    console.log("loading medicos....");
     this.serviceMedico.getMedicos().subscribe(res => {
       this.medicoList = res;
-      console.log(res);
     });
-    console.log("teste");
   }
   private inicializarForm() {
     this.formConsulta = new FormGroup({
@@ -71,9 +65,7 @@ export class CadastroConsultaComponent implements OnInit {
     })
   }
   cadastrarConsulta() {
-    console.log(this.formConsulta.value);
     this.serviceConsulta.cadastrarConsulta(this.formConsulta.value).subscribe(res => {
-      console.log(res);
       if (res.body.id) {
         this.toastr.success("Consulta cadastrado com Sucesso");
         // this.router.navigate(['/listar-paciente']);

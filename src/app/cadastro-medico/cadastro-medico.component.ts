@@ -43,12 +43,9 @@ export class CadastroMedicoComponent implements OnInit {
 
 
   loadEspecialidades(): void {
-    console.log("loading especialidades....");
     this.especialidadesService.getEspecialidades().subscribe(res => {
       this.especialidades = res;
-      console.log(res);
     });
-     console.log("teste");
   }
 
   private inicializarForm(){
@@ -62,7 +59,6 @@ export class CadastroMedicoComponent implements OnInit {
 
   cadastrarMedico(){
     this.medicoService.cadastrarMedico(this.formMedico.value).subscribe(res =>{
-      console.log(res);
       if(res.body.id){
         this.toast.success("Médico cadastrado com Sucesso");
         this.router.navigate(['/listar-medico']);

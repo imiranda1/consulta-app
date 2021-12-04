@@ -61,5 +61,5 @@
 
 <ng-container *ngIf="isDetailsModalVisible">
   <app-modal-consultas-paciente (onClose)="isDetailsModalVisible = false" [paciente]="pacienteMostrar"
-    [listaConsultas]="consultasList" [listaMedicos]="medicoList" (update)="refresh()"></app-modal-consultas-paciente>
+    [listaConsultas]="consultasList" [listaMedicos]="medicoList" [consultas]="list"(update)="refresh()"></app-modal-consultas-paciente>
 </ng-container>

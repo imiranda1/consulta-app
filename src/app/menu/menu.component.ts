@@ -21,7 +21,6 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/']);
   }
   homeSession():void{
-    console.log(sessionStorage);
     if(sessionStorage.getItem('token') != null){
       this.router.navigate(['/home']);
     }else{

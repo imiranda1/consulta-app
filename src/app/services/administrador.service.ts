@@ -24,7 +24,6 @@ export class AdministradorService {
 
             if(res["token"]){
               sessionStorage.setItem("token", res["token"]);
-               console.log("Autenticado");
             }
           })
       );
@@ -42,7 +41,6 @@ export class AdministradorService {
 
             if(res["token"]){
               sessionStorage.setItem("token", res["token"]);
-               console.log("Autenticado");
             }
           })
       );
@@ -51,10 +49,6 @@ export class AdministradorService {
 
     cadastrar(user: User): Observable<any>{
       let body = new HttpParams();
-      console.log("calling web service");
-
-      console.log(user.login);
-      console.log(user.senha);
 
       body = body.set("login", user.login);
       body = body.set("senha", user.senha);
@@ -62,7 +56,6 @@ export class AdministradorService {
       return this.http.put<any>(this.adminURL,body)
         .pipe(
               tap(res => {
-                console.log(res["token"]);
 
                 if(res["token"]){
                   sessionStorage.setItem("token", res["token"]);

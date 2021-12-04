@@ -6,6 +6,7 @@ import { Consultas } from '../models/Consultas';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
+import { ConsultaDTO } from '../services/ConsultaDTO';
 import { MedicoService } from '../services/medico.service';
 import { PacienteService } from '../services/paciente.service';
 
@@ -19,7 +20,7 @@ export class ListarPacienteComponent implements OnInit {
   pacienteMostrar: Paciente;
   isEditModalVisible = false;
   isDetailsModalVisible = false;
-
+  listaConsultas: ConsultaDTO[];
   consultasList:Consultas[]
   medicoList:Medico[]
 
@@ -38,6 +39,7 @@ export class ListarPacienteComponent implements OnInit {
         this.loadPacientes();
         this.loadConsultas();
         this.loadMedicos();
+        // this.loadConsultas2();
 
       }else {
         this.toast.warning("Sua sessão expirou!");
@@ -51,12 +53,9 @@ export class ListarPacienteComponent implements OnInit {
   }
 
   loadPacientes(): void {
-    console.log("loading pacientes....");
     this.pacienteService.getPacientes().subscribe(res => {
       this.pacienteList = res;
-      console.log(res);
     });
-     console.log("teste");
   }
 
   refresh(){
@@ -64,42 +63,51 @@ export class ListarPacienteComponent implements OnInit {
   }
 
   showPacienteModal(paciente: Paciente){
-    console.log("showPacienteModal 1")
     this.isEditModalVisible = true;
     this.pacienteMostrar = paciente;
   }
   showConsultaPacienteModal(paciente: Paciente){
-    console.log("showConsultaPacienteModal 1")
     this.isDetailsModalVisible = true;
     this.pacienteMostrar = paciente;
   }
 
   deletePaciente(pacienteId:string){
-    this.pacienteService.excluirPaciente(pacienteId).subscribe(res => {
-      if (res.body.status == "OK") {
-        this.toast.success("Paciente excluído com Sucesso");
-        this.loadPacientes();
-      }else{
-        this.toast.error("Erro ao excluir o paciente");
-      }
-    });
+    if(this.jwtHelper.tokenValidator){
+      this.pacienteService.excluirPaciente(pacienteId).subscribe(res => {
+        if (res.body.status == "OK") {
+          this.toast.success("Paciente excluído com Sucesso");
+          this.loadPacientes();
+        }else{
+          this.toast.error("Erro ao excluir o paciente");
+        }
+      });
+    }else{
+      this.toast.error("Sessão Expirada");
+      this.router.navigate(['/']);
+    }
+
   }
 
 
   loadConsultas(){
     this.serviceConsultas.getConsultas().subscribe(res =>{
       this.consultasList = res;
-      console.log(res);
     });
   }
 
 
   loadMedicos(): void {
-    console.log("loading medicos....");
     this.serviceMedico.getMedicos().subscribe(res => {
       this.medicoList = res;
-      console.log(res);
     });
-     console.log("teste");
   }
+
+  // loadConsultas2(): void {
+  //   this.serviceConsultas.buscarConsultas().subscribe(res => {
+  //     this.listaConsultas = res;
+  //     console.log(res);
+  //   });
+  // }
+
+
 }

@@ -30,8 +30,6 @@ export class ModalConsultasMedicoComponent implements OnInit {
   ngOnInit(): void {
     this.createConsultaDetalhes(this.medico);
 
-    console.log(this.listaConsultas);
-
   }
 
   createConsultaDetalhes(medico: Medico) {
@@ -46,7 +44,6 @@ export class ModalConsultasMedicoComponent implements OnInit {
         })
     }
     )
-    console.log(this.consultaDetalhes);
   }
 
   getNomePaciente(idPaciente: string): string {

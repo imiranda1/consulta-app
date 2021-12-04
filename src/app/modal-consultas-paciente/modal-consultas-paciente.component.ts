@@ -6,6 +6,7 @@ import { Consultas } from '../models/Consultas';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
+import { ConsultaDTO } from '../services/ConsultaDTO';
 import { MedicoService } from '../services/medico.service';
 
 @Component({
@@ -18,6 +19,8 @@ export class ModalConsultasPacienteComponent implements OnInit {
   @Input() paciente: Paciente;
   @Input() listaMedicos: Medico[];
   @Input() listaConsultas: Consultas[];
+  @Input() consultas: ConsultaDTO[];
+
 
   consultaDetalhes:ConsultaDetalhe[] = []
   filteredList: Consultas[] = [];
@@ -33,14 +36,11 @@ export class ModalConsultasPacienteComponent implements OnInit {
   }
 
   filterConsulta(){
-    console.log("filtrando consultas by PACIENTE...")
     this.filteredList = this.listaConsultas
       .filter(consulta => consulta.idPaciente === this.paciente.id);
   }
 
   createConsultaDetalhes(paciente:Paciente){
-    console.log("Criando detalhes da Consulta....");
-    console.log("filtrando....");
     this.filterConsulta();
       this.filteredList.forEach(consulta => {
         this.consultaDetalhes.push(
@@ -52,7 +52,6 @@ export class ModalConsultasPacienteComponent implements OnInit {
           })
       }
       )
-      console.log(this.consultaDetalhes);
   }
 
   carregaConsultas(){
@@ -63,7 +62,6 @@ export class ModalConsultasPacienteComponent implements OnInit {
 
 
   getNomeMedico(idMedico: string): string {
-    console.log("Buscando Medico....");
     const foundMedico = this.listaMedicos.find(medico => medico.id == idMedico);
     return foundMedico.nome;
   }
