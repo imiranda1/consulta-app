@@ -61,9 +61,9 @@ export class ListarPacienteComponent implements OnInit {
 
   deletePaciente(pacienteId:string){
     this.pacienteService.excluirPaciente(pacienteId).subscribe(res => {
-      if(res.ok == true){
+      if (res.body.status == "OK") {
         this.toast.success("Paciente excluído com Sucesso");
-        location.reload();
+        this.loadPacientes();
       }else{
         this.toast.error("Erro ao excluir o paciente");
       }

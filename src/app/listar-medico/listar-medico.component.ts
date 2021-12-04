@@ -6,12 +6,10 @@ import { Consultas } from '../models/Consultas';
 import { Especialidades } from '../models/Especialidades';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
-import { ConsultaService } from '../services/consulta.service';
 import { EspecialidadesService } from '../services/especialidades.service';
-
-import { Medico } from '../models/Medico';
-import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
+import { MedicoService } from '../services/medico.service';
+import { PacienteService } from '../services/paciente.service';
 
 
 @Component({
@@ -22,6 +20,7 @@ import { ConsultaService } from '../services/consulta.service';
 export class ListarMedicoComponent implements OnInit {
 
   medicoList: Medico[];
+  medicoListDetalhe: Medico[];
 
   pacienteList: Paciente[];
   consultasList: Consultas[]
@@ -40,13 +39,11 @@ export class ListarMedicoComponent implements OnInit {
     private especialidadeService: EspecialidadesService) { }
 
   ngOnInit(): void {
+    this.loadEspecialidades();
+    this.loadConsultas();
     this.loadMedicos();
     this.loadPacientes();
 
-    this.loadConsultas();
-    this.loadEspecialidades();
-
-    this.loadConsultas
 
   }
 
@@ -62,10 +59,13 @@ export class ListarMedicoComponent implements OnInit {
   }
 
   deleteMedico(id: string): void {
+    console.log("medico deletado")
     this.medicoService.excluirMedico(id).subscribe(res => {
-      if (res.ok == true) {
+      console.log("medico deletado")
+      console.log(res)
+      if (res.body.status == "OK") {
         this.toast.success("Médico excluído com Sucesso");
-        location.reload();
+        this.loadMedicos();
       } else {
         this.toast.error("Erro ao excluir o médico");
       }
@@ -76,7 +76,24 @@ export class ListarMedicoComponent implements OnInit {
     console.log("loading medicos....");
     this.medicoService.getMedicos().subscribe(res => {
       this.medicoList = res;
+      this.buildMedicoDetalhes();
     });
+
+
+  }
+
+  buildMedicoDetalhes(){
+    this.medicoList.forEach(medico =>{
+      console.log("building medico especialidade")
+      medico.nomeEspecialdiade = this.getNomeEspecialidadeById(medico.idEspecialidade)
+      console.log("building medico especialidade:::" + this.getNomeEspecialidadeById(medico.idEspecialidade))
+    })
+
+  }
+
+  getNomeEspecialidadeById(idEspecialidade : string): string{
+    const foundEspcDesc = this.especialidades.find(especialidade => especialidade.id == idEspecialidade);
+    return foundEspcDesc.nome;
 
   }
 
@@ -93,29 +110,9 @@ export class ListarMedicoComponent implements OnInit {
     });
   }
 
-  showConsultaMedicoModal(medico: Medico) {
-
-    console.log("teste");
-  }
-
-  loadPacientes(): void {
-    console.log("loading pacientes....");
-    this.pacienteService.getPacientes().subscribe(res => {
-      this.pacienteList = res;
-      console.log(res);
-    });
-     console.log("teste");
-  }
-
-  loadConsultas(){
-    this.consultaService.getConsultas().subscribe(res =>{
-      this.consultasList = res;
-      console.log(res);
-    });
-  }
-
-  showConsultaPacienteModal(medico: Medico){
+  async showConsultaMedicoModal(medico: Medico) {
     this.isDetailsModalVisible = true;
+
     this.medicoMostrar = medico;
   }
 
@@ -123,6 +120,16 @@ export class ListarMedicoComponent implements OnInit {
   loadEspecialidades(): void {
     this.especialidadeService.getEspecialidades().subscribe(res => {
       this.especialidades = res;
+      console.log(res);
+    });
+  }
+
+  // nossa função delay com suporte a promisse.
+  private delay(ms: number): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
     });
   }
 }

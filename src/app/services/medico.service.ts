@@ -26,6 +26,7 @@ export class MedicoService {
   }
 
   excluirMedico(idMedico: string): Observable<any> {
+    console.log("medico deletado service")
     return this.http.delete(this.medicoURL + "/?id=" + idMedico, { observe: "response" });
   }
 

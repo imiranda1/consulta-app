@@ -4,21 +4,19 @@
      <form  form [formGroup]="formMedico"(submit)="cadastrarMedico()" class="my-5 ng-pristine ng-invalid ng-touched">
         <div  class="field">
            <label  class="label">Nome</label>
-           <div  class="control"><input  type="text" formControlName="nome" placeholder="Nome" class="input is-danger ng-untouched ng-pristine ng-invalid"></div>
-           <p  class="help is-danger ng-star-inserted">Nome inválido</p>
+           <div  class="control"><input  type="text" formControlName="nome" placeholder="Nome" [ngClass]="this.formMedico.get('nome')?.valid ? 'input is-success': 'input is-danger'"></div>
            <!----><!----><!---->
         </div>
         <div  class="field">
            <label  class="label">Especialidade</label>
             <div class="select">
-              <select formControlName="idEspecialidade" class="select is-danger ng-untouched ng-pristine ng-invalid">
+              <select formControlName="idEspecialidade" [ngClass]="this.formMedico.get('idEspecialidade')?.valid ? 'input is-success': 'input is-danger'">
                 <option disabled selected value> -- select an option -- </option>
                 <option *ngFor="let especialidade of especialidades" value={{especialidade.id}}>
                   {{especialidade.nome}}
                 </option>
               </select>
             </div>
-            <p class="help is-danger ng-star-inserted">Paciente inválido</p>
            </div>
 
         <div  class="field is-grouped">

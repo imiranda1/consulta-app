@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Especialidades } from '../models/Especialidades';
@@ -39,8 +39,8 @@ export class CadastroMedicoComponent implements OnInit {
 
   private inicializarForm(){
     this.formMedico = new FormGroup({
-      idEspecialidade: new FormControl(null),
-      nome: new FormControl(null),
+      idEspecialidade: new FormControl(null,Validators.required),
+      nome: new FormControl(null, Validators.required),
 
     })
   }
