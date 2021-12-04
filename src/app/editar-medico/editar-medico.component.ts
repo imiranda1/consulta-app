@@ -28,6 +28,8 @@ export class EditarMedicoComponent implements OnInit {
     this.inicializarForm();
   }
 
+
+
   loadEspecialidades(): void {
     this.especialidadesService.getEspecialidades().subscribe(res => {
       this.especialidades = res;

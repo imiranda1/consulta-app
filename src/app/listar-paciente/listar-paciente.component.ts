@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { JWTServiceService } from '../jwtservice.service';
 import { Consultas } from '../models/Consultas';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
@@ -27,12 +28,26 @@ export class ListarPacienteComponent implements OnInit {
     private serviceMedico: MedicoService,
     private rota: ActivatedRoute,
     private router: Router,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private jwtHelper: JWTServiceService) { }
+
 
   ngOnInit(): void {
-    this.loadPacientes();
-    this.loadConsultas();
-    this.loadMedicos();
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
+        this.loadPacientes();
+        this.loadConsultas();
+        this.loadMedicos();
+
+      }else {
+        this.toast.warning("Sua sessão expirou!");
+        this.router.navigate(['/']);
+      }
+
+    }else{
+      this.toast.error("Usuário não logado");
+      this.router.navigate(['/']);
+    }
   }
 
   loadPacientes(): void {

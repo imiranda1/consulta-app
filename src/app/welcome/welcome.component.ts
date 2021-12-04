@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JWTServiceService } from '../jwtservice.service';
 
 @Component({
   selector: 'app-welcome',
@@ -8,9 +9,16 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private jwtHelper: JWTServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
+        this.router.navigate(['/home']);
+        }
+
+    }
+
   }
 
 }

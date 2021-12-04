@@ -10,6 +10,7 @@ import { EspecialidadesService } from '../services/especialidades.service';
 import { ConsultaService } from '../services/consulta.service';
 import { MedicoService } from '../services/medico.service';
 import { PacienteService } from '../services/paciente.service';
+import { JWTServiceService } from '../jwtservice.service';
 
 
 @Component({
@@ -36,15 +37,23 @@ export class ListarMedicoComponent implements OnInit {
     private rota: ActivatedRoute,
     private router: Router,
     private toast: ToastrService,
-    private especialidadeService: EspecialidadesService) { }
+    private especialidadeService: EspecialidadesService,
+    private jwtHelper: JWTServiceService) { }
 
   ngOnInit(): void {
-    this.loadEspecialidades();
-    this.loadConsultas();
-    this.loadMedicos();
-    this.loadPacientes();
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
 
+        this.carregar();
+      }else {
+        this.toast.warning("Sua sessão expirou!");
+        this.router.navigate(['/']);
+      }
 
+    }else{
+      this.toast.error("Usuário não logado");
+      this.router.navigate(['/']);
+    }
   }
 
   showMedicoModalEditar(medico: Medico) {
@@ -122,6 +131,17 @@ export class ListarMedicoComponent implements OnInit {
       this.especialidades = res;
       console.log(res);
     });
+  }
+
+
+
+  async carregar() {
+    await this.loadEspecialidades();
+    await this.loadConsultas();
+    await this.loadMedicos();
+    await this.loadPacientes();
+    await this.delay(1000);
+
   }
 
   // nossa função delay com suporte a promisse.

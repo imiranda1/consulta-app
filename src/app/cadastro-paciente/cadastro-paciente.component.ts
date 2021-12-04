@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { JWTServiceService } from '../jwtservice.service';
 import { PacienteService } from '../services/paciente.service';
 
 @Component({
@@ -17,11 +18,23 @@ export class CadastroPacienteComponent implements OnInit {
   constructor(private pacienteService: PacienteService,
     private rota: ActivatedRoute,
     private router: Router,
-    private toast: ToastrService ){ }
+    private toast: ToastrService,
+    private jwtHelper: JWTServiceService){ }
 
 
   ngOnInit(): void {
-    this.inicializarForm();
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
+        this.inicializarForm();
+      }else {
+        this.toast.warning("Sua sessão expirou!");
+        this.router.navigate(['/']);
+      }
+
+    }else{
+      this.toast.error("Usuário não logado");
+      this.router.navigate(['/']);
+    }
   }
 
   private inicializarForm(){

@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Especialidades } from '../models/Especialidades';
 import { EspecialidadesService } from '../services/especialidades.service';
 import { MedicoService } from '../services/medico.service';
+import {JwtHelperService} from '@auth0/angular-jwt'
+import { JWTServiceService } from '../jwtservice.service';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -20,11 +22,23 @@ export class CadastroMedicoComponent implements OnInit {
     private medicoService: MedicoService,
     private rota: ActivatedRoute,
     private router: Router,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private jwtHelper: JWTServiceService) { }
 
   ngOnInit(): void {
-    this.loadEspecialidades();
-    this.inicializarForm();
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
+        this.loadEspecialidades();
+        this.inicializarForm();
+      }else {
+        this.toast.warning("Sua sessão expirou!");
+        this.router.navigate(['/']);
+      }
+
+    }else{
+      this.toast.error("Usuário não logado");
+      this.router.navigate(['/']);
+    }
   }
 
 

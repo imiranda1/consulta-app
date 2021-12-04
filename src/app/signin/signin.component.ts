@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterState } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { JWTServiceService } from '../jwtservice.service';
 import { AdministradorService } from '../services/administrador.service';
 
 @Component({
@@ -16,15 +17,11 @@ export class SigninComponent implements OnInit {
   constructor(private adminService : AdministradorService,
     private rota: ActivatedRoute,
     private router: Router,
-    private toast: ToastrService ){ }
+    private toastr: ToastrService,
+    private jwtHelper: JWTServiceService ){ }
 
   ngOnInit(): void {
     this.inicializarForm();
-    console.log(this.adminService.isLogged());
-    if(this.adminService.isLogged() == false){
-      this.router.navigate(['/']);
-
-    }else{}
   }
 
   private inicializarForm(){
@@ -38,11 +35,11 @@ export class SigninComponent implements OnInit {
     this.adminService.fazerLogin(this.formUser.value).subscribe(res => {
       if(res.token){
         this.router.navigate(['/home']);
-        this.toast.success("Login realizado com sucesso!");
+        this.toastr.success("Login realizado com sucesso!");
       }
       else{
         console.log(res.ok)
-        this.toast.error("Erro ao realizar login");
+        this.toastr.error("Erro ao realizar login");
       }
     });
   }

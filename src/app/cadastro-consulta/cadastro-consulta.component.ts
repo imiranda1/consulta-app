@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { JWTServiceService } from '../jwtservice.service';
 import { Medico } from '../models/Medico';
 import { Paciente } from '../models/Paciente';
 import { ConsultaService } from '../services/consulta.service';
 import { MedicoService } from '../services/medico.service';
 import { PacienteService } from '../services/paciente.service';
+
 
 @Component({
   selector: 'app-cadastro-consulta',
@@ -17,16 +19,31 @@ export class CadastroConsultaComponent implements OnInit {
   medicoList: Medico[];
   pacienteList: Paciente[];
   formConsulta: FormGroup;
+
   constructor(private servicePaciente: PacienteService,
     private toastr: ToastrService,
-    private rota: Router,
+    private router: Router,
     private serviceConsulta: ConsultaService,
-    private serviceMedico: MedicoService) { }
+    private serviceMedico: MedicoService,
+    private jwtHelper: JWTServiceService
+  ) { }
 
   ngOnInit(): void {
-    this.inicializarForm();
-    this.loadMedicos();
-    this.loadPacientes();
+
+    if(this.jwtHelper.hasToken()){
+      if(this.jwtHelper.tokenValidator()){
+        this.inicializarForm();
+        this.loadMedicos();
+        this.loadPacientes();
+      }else {
+        this.toastr.warning("Sua sessão expirou!");
+        this.router.navigate(['/']);
+      }
+    }else{
+      this.toastr.error("Usuário não logado");
+      this.router.navigate(['/']);
+    }
+
   }
   loadPacientes(): void {
     console.log("loading pacientes....");
@@ -59,7 +76,7 @@ export class CadastroConsultaComponent implements OnInit {
       console.log(res);
       if (res.body.id) {
         this.toastr.success("Consulta cadastrado com Sucesso");
-        this.rota.navigate(['/listar-paciente']);
+        this.router.navigate(['/listar-paciente']);
       }
       else {
         this.toastr.error("Erro ao cadastrar Paciente");

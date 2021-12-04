@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../models/User';
 import { AdministradorService } from '../services/administrador.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { AdministradorService } from '../services/administrador.service';
 export class SignupComponent implements OnInit {
 
   formUser: FormGroup;
-  constructor(private web : AdministradorService,
+  constructor(private adminService : AdministradorService,
     private rota: ActivatedRoute,
     private router: Router,
     private toast: ToastrService) { }
@@ -22,23 +23,37 @@ export class SignupComponent implements OnInit {
   }
   private inicializarForm(){
     this.formUser = new FormGroup({
-      nome: new FormControl(null,Validators.required),
+      // nome: new FormControl(null,Validators.required),
       login: new FormControl(null,Validators.required),
       senha: new FormControl(null,Validators.required)
     })
   }
 
   cadastrar(){
-    this.web.cadastrar(this.formUser.value).subscribe(res =>{
+    this.adminService.cadastrar(this.formUser.value).subscribe(res =>{
       console.log(res);
       if(res.id){
         this.toast.success("Cadastro realizado com Sucesso");
-        this.router.navigate(['/home']);
+        this.fazerLogin(this.formUser.value);
       }
       else{
         this.toast.error("Erro ao cadastrar");
       }
     });
+
   }
 
+  fazerLogin(user:User){
+    this.adminService.fazerLogin(user).subscribe(res => {
+      if(res.token){
+        this.router.navigate(['/home']);
+        this.toast.success("Login realizado com sucesso!");
+      }
+      else{
+        console.log(res.ok)
+        this.toast.error("Erro ao realizar login");
+      }
+    });
+
+  }
 }

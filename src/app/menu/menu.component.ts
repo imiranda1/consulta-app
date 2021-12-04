@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JWTServiceService } from '../jwtservice.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,10 +9,13 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private jwtHelper : JWTServiceService) { }
 
   ngOnInit(): void {
   }
+
+
+
   logout(): void{
     sessionStorage.removeItem("token");
     this.router.navigate(['/']);
@@ -25,4 +29,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
+
+  isLogged():boolean{
+    return (this.jwtHelper.hasToken()  && this.jwtHelper.tokenValidator())?true:false;
+  }
 }
